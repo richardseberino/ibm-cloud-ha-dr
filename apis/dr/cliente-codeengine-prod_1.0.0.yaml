@@ -1,0 +1,141 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: cliente-codeengine-dr
+  x-ibm-name: cliente-codeengine-dr
+basePath: /cliente-codeengine-dr
+x-ibm-configuration:
+  properties:
+    target-url:
+      value: >-
+        https://cliente-leap.129pp6c5sycg.us-south.codeengine.appdomain.cloud/api/clientes
+      description: URL of the proxy policy
+      encoded: false
+  cors:
+    enabled: true
+  gateway: datapower-api-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: ($operationPath() = '/api/ambiente')
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: api-ambiente
+                    backend-type: json
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: GET
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    websocket-upgrade: false
+                    target-url: >-
+                      https://cliente-leap.129pp6c5sycg.us-south.codeengine.appdomain.cloud/api/ambiente
+            - otherwise:
+                - invoke:
+                    version: 2.2.0
+                    title: api-clientes
+                    backend-type: json
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    websocket-upgrade: false
+                    target-url: >-
+                      https://cliente-leap.129pp6c5sycg.us-south.codeengine.appdomain.cloud/api/clientes
+    finally: []
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+paths:
+  /api/ambiente:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      produces:
+        - application/json
+  /api/clientes:
+    post:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              nome:
+                type: string
+              email:
+                type: string
+              telefone:
+                type: string
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              nome:
+                type: string
+              email:
+                type: string
+              telefone:
+                type: string
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nome:
+                  type: string
+                email:
+                  type: string
+                telefone:
+                  type: string
+securityDefinitions:
+  clientID:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - clientID: []
+schemes:
+  - https

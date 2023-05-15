@@ -1,0 +1,30 @@
+apiVersion: apiconnect.ibm.com/v1beta1
+kind: APIConnectCluster
+metadata:
+  labels:
+    app.kubernetes.io/instance: apiconnect
+    app.kubernetes.io/managed-by: ibm-apiconnect
+    app.kubernetes.io/name: apiconnect-small
+  name: apic-caso8
+  namespace: cp4i
+spec:
+  license:
+    accept: true
+    license: L-VQYA-YNM22H
+    metric: VIRTUAL_PROCESSOR_CORE
+    use: nonproduction
+  imagePullSecrets:
+    - ibm-entitlement-key
+  eemServicesAPIEndpoint: {}
+  analytics:
+    mtlsValidateClient: true
+  storageClassName: ocs-storagecluster-ceph-rbd
+  profile: n1xc7.m48
+  portal:
+    adminClientSubjectDN: ''
+    mtlsValidateClient: true
+    originalUID: ''
+    portalAdminEndpoint: {}
+    portalUIEndpoint: {}
+  version: 10.0.5.3
+  imageRegistry: cp.icr.io/cp/apic

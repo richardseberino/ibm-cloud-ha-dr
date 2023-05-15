@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Demo App - Bradesco Seguros</title>
+        <link rel="stylesheet" href="css/theme.css">
+        <meta charset="UTF-8">
+        <script>
+            (function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},
+            n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
+            ineum('reportingUrl', 'https://13.116.89.223:446/eum/');
+            ineum('key', 'eFTsWsFDQSS7ZjtlGSMJhw');          
+            ineum('page','menu.html');
+            ineum('trackSessions');
+          </script>        
+        <script>
+            function recuperaAmbiente()
+            {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //var list = JSON.parse(this.responseText);
+                    document.getElementById('ambiente').innerHTML=this.responseText;
+                }
+                };
+                xhttp.open("GET", "https://apic-dr-gw-gateway-cp4i.cp4-caso8-dr-d562ebd5f38f1bf50619fbd355c65b3e-0000.us-south.containers.appdomain.cloud/caso8-dr/dr/cliente-codeengine-dr/api/ambiente", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.setRequestHeader("X-IBM-Client-Id", "1680fcf948de6a62ab46fa00ca6f6f37");
+                xhttp.send();
+                //xmlhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword'));
+
+            }
+        </script>
+    </head>
+    <body onload="recuperaAmbiente();">
+        <center>
+            <br /><img src="img/logo.png" width="120px" />
+            <h1>Menu principal</h1>
+            <br />
+            <br />
+            <a href="clientes.html">Lista de Clientes</a><br />
+            <a href="novoCliente.html">Novo Cliente</a><br />
+            <a href="sessoes.html">Lista de Sessões</a><br /><br >
+    
+            <a href="index.html">Sair</a><br />
+            <br /><br />
+            Ambiente: <div id="ambiente" name="ambiente"></div>
+        </center>
+    </body>
+</html>

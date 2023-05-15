@@ -1,0 +1,143 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: sessao-openshift-prod
+  x-ibm-name: sessao-openshift-prod
+basePath: /sessao-openshift-prod
+x-ibm-configuration:
+  properties:
+    target-url:
+      value: >-
+        http://sessao-caso8.cp4-caso8-d562ebd5f38f1bf50619fbd355c65b3e-0000.br-sao.containers.appdomain.cloud
+      description: URL of the proxy policy
+      encoded: false
+  cors:
+    enabled: true
+  gateway: datapower-api-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: ($operationPath() = '/api/ambiente')
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: api-ambiente
+                    backend-type: json
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: GET
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    websocket-upgrade: false
+                    target-url: >-
+                      http://sessao-caso8.cp4-caso8-d562ebd5f38f1bf50619fbd355c65b3e-0000.br-sao.containers.appdomain.cloud/api/ambiente
+            - otherwise:
+                - invoke:
+                    version: 2.2.0
+                    title: api-sessoes
+                    backend-type: json
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    websocket-upgrade: false
+                    target-url: >-
+                      http://sessao-caso8.cp4-caso8-d562ebd5f38f1bf50619fbd355c65b3e-0000.br-sao.containers.appdomain.cloud/api/sessoes
+    finally: []
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+paths:
+  /api/sessoes:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                usuario:
+                  type: string
+      consumes: []
+      produces:
+        - application/json
+    post:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              usuario:
+                type: string
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              usuario:
+                type: string
+      consumes: []
+      produces:
+        - application/json
+    delete:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces:
+        - application/json
+  /api/ambiente:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      produces:
+        - application/json
+securityDefinitions:
+  clientID:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - clientID: []
+schemes:
+  - https

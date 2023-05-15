@@ -1,0 +1,37 @@
+info:
+  title: cliente
+  name: cliente-app
+  version: 1.0.0
+apis:
+  cliente-vm-prod1.0.0:
+    $ref: cliente-vm-prod_1.0.0.yaml
+  cliente-codeengine-prod1.0.0:
+    $ref: cliente-codeengine-prod_1.0.0.yaml
+  cliente-openshift-prod1.0.0:
+    $ref: cliente-openshift-prod_1.0.0.yaml
+gateways:
+  - datapower-api-gateway
+plans:
+  default-plan:
+    title: Default Plan
+    description: Default Plan
+    approval: false
+    rate-limits:
+      default:
+        value: 100/1hour
+    apis:
+      cliente-vm-prod1.0.0: {}
+      cliente-codeengine-prod1.0.0: {}
+      cliente-openshift-prod1.0.0: {}
+product: 1.0.0
+visibility:
+  view:
+    enabled: true
+    type: public
+    tags: []
+    orgs: []
+  subscribe:
+    enabled: true
+    type: authenticated
+    tags: []
+    orgs: []

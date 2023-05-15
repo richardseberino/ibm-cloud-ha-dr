@@ -1,0 +1,36 @@
+info:
+  version: 1.0.0
+  title: sessao
+  name: sessao
+gateways:
+  - datapower-api-gateway
+plans:
+  default-plan:
+    title: Default Plan
+    description: Default Plan
+    rate-limits:
+      default:
+        value: 100/1hour
+    apis:
+      sessao-vm-prod1.0.0: {}
+      sessao-codeengine-prod1.0.0: {}
+      sessao-openshift-prod1.0.0: {}
+apis:
+  sessao-vm-prod1.0.0:
+    $ref: sessao-vm-prod_1.0.0.yaml
+  sessao-codeengine-prod1.0.0:
+    $ref: sessao-codeengine-prod_1.0.0.yaml
+  sessao-openshift-prod1.0.0:
+    $ref: sessao-openshift-prod_1.0.0.yaml
+visibility:
+  view:
+    type: public
+    orgs: []
+    tags: []
+    enabled: true
+  subscribe:
+    type: authenticated
+    orgs: []
+    tags: []
+    enabled: true
+product: 1.0.0

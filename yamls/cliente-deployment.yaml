@@ -1,0 +1,58 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: cliente
+  namespace: caso8
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cliente
+  template:
+    metadata:
+      labels:
+        app: cliente
+    spec:
+      containers:
+        - name: cliente-api
+          image: 'br.icr.io/caso8/cliente-pipeline:10'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: AMBIENTE
+              value: Prod-OpenShift
+          resources:
+            limits:
+              cpu: 1000
+              memory: 1Gi
+      imagePullSecrets:
+        - name: ibm-cloud-registry
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cliente
+  namespace: caso8
+  labels:
+    app: cliente
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: cliente
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: cliente
+  namespace: caso8
+spec:
+  to:
+    kind: Service
+    name: cliente
+    weight: 100
+  port:
+    targetPort: 8080
