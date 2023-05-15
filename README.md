@@ -1,5 +1,5 @@
 # IBM Cloud HA & DR
-Describe usage of principals like High Availability and Disaster Recovery at IBM Cloud
+Describe the usage of Cloud Native principals like: Scalability, High Availability and Disaster Recovery at IBM Cloud
 
 This is an how-to tutorial, step-by-step, about how to deploy a sample application using 3 different approaches: Kubernetes/OpenShift, Function As a Service (Code Engine) and tradicional Virtual Machines. 
 
@@ -22,7 +22,7 @@ This tutorial is split in 4 steps:
       - 6 for applications (3 per region, and each machine in his own Availability zone
 
       - 1 for Instana (Production region)
-      
+
       - 1 for LDAP (Production region)
 
 ### 2 - Configure the infrastructure
