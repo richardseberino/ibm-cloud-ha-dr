@@ -1,4 +1,4 @@
-/Users/seberino/Dev/leap/sessao/src/main/java/com/ibm/bradesco/poc/sessao/jpa/SessaoRepositorio.java
-/Users/seberino/Dev/leap/sessao/src/main/java/com/ibm/bradesco/poc/sessao/SessaoControler.java
-/Users/seberino/Dev/leap/sessao/src/main/java/com/ibm/bradesco/poc/sessao/dto/Sessao.java
-/Users/seberino/Dev/leap/sessao/src/main/java/com/ibm/bradesco/poc/sessao/SessaoApplication.java
+/Users/seberino/Dev/ibm-cloud-ha-dr/sessao/src/main/java/com/ibm/bradesco/poc/sessao/SessaoApplication.java
+/Users/seberino/Dev/ibm-cloud-ha-dr/sessao/src/main/java/com/ibm/bradesco/poc/sessao/dto/Sessao.java
+/Users/seberino/Dev/ibm-cloud-ha-dr/sessao/src/main/java/com/ibm/bradesco/poc/sessao/jpa/SessaoRepositorio.java
+/Users/seberino/Dev/ibm-cloud-ha-dr/sessao/src/main/java/com/ibm/bradesco/poc/sessao/SessaoControler.java
